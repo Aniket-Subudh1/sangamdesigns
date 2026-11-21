@@ -28,7 +28,7 @@ export function WhySangam() {
               <Link key={p.title} href={p.href} className="group flex items-center justify-between gap-5 border-b border-line py-4">
                 <div>
                   <p className="m-0 font-display text-[15px] font-medium tracking-[0.04em] uppercase transition-colors group-hover:text-accent">{p.title}</p>
-                  <p className="mt-1 mb-0 text-[11px] text-muted">{p.detail}</p>
+                  <p className="mt-1 mb-0 text-[12px] text-muted">{p.detail}</p>
                 </div>
                 <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line transition-[background-color,color,border-color,transform] duration-300 group-hover:rotate-45 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
                   <ArrowUpRight size={13} />

@@ -139,10 +139,10 @@ export function Header({
       if (!drawer) return;
       const links = drawer.querySelectorAll("[data-drawer-link]");
       if (menuOpen) {
-        gsap.to(drawer, { xPercent: 0, autoAlpha: 1, duration: 0.6, ease: EASE });
+        gsap.to(drawer, { x: 0, xPercent: 0, autoAlpha: 1, duration: 0.6, ease: EASE });
         gsap.fromTo(links, { x: -24, autoAlpha: 0 }, { x: 0, autoAlpha: 1, stagger: 0.04, delay: 0.12, duration: 0.6, ease: EASE });
       } else {
-        gsap.to(drawer, { xPercent: -106, autoAlpha: 0, duration: 0.45, ease: "power3.in" });
+        gsap.to(drawer, { x: 0, xPercent: -106, autoAlpha: 0, duration: 0.45, ease: "power3.in" });
       }
     },
     { dependencies: [menuOpen] },
@@ -239,7 +239,7 @@ export function Header({
               </a>
             </MagneticButton>
             <MagneticButton strength={0.5}>
-              <button type="button" data-cart-target className={iconButtonClass} onClick={() => setCartOpen(true)} aria-label={`Open bag with ${cartCount} items`}>
+              <button type="button" data-cart-target className={iconButtonClass} onClick={() => setCartOpen(true)} aria-label={`Open bag with ${cartCount} ${cartCount === 1 ? "item" : "items"}`}>
                 <ShoppingBag size={16} />
                 {cartCount > 0 ? (
                   <span ref={badgeRef} key={cartCount} className="absolute -top-0.5 -right-0.5 grid min-w-[16px] place-items-center rounded-full bg-stitch px-1 font-sans text-[9px] leading-4 font-semibold text-white tabular-nums">

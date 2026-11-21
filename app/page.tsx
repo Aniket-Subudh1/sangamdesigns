@@ -72,7 +72,7 @@ export default async function Home() {
             <ArrowRight size={14} className="transition-transform duration-200 ease-store group-hover:translate-x-[3px]" />
           </Link>
         </div>
-        <ProductGrid products={featuredSummaries} chips={rootChips} limit={8} />
+        <ProductGrid products={featuredSummaries} chips={rootChips} limit={8} columns="grid-cols-2 lg:grid-cols-4" />
         <Reveal className="mt-8 flex justify-center md:hidden">
           <Link className={`${textLinkCtaClass} text-ink`} href="/shop">
             <span className={textLinkLabelClass}>Shop all pieces</span>

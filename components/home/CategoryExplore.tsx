@@ -18,7 +18,7 @@ export function CategoryExplore({ tree }: { tree: CategoryNode[] }) {
           <p className={`${kickerClass} mb-4`}>Shop by category</p>
           <SplitReveal className={`${sectionTitleClass} max-w-[10ch] text-[clamp(42px,5vw,68px)]`}>Find your next heirloom</SplitReveal>
         </div>
-        <span className="hidden max-w-[30ch] text-right text-[12px] leading-[1.65] text-muted sm:block">Bedding, living, bags and menswear — all made by hand.</span>
+        <span className="hidden max-w-[30ch] text-right text-[13px] leading-[1.65] text-steel sm:block">Bedding, living, bags and menswear — all made by hand.</span>
       </div>
       <Reveal stagger={0.08} className="grid grid-cols-2 gap-(--grid-gap) lg:grid-cols-4">
         {tree.map((node, index) => (

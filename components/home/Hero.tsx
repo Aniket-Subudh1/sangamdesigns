@@ -78,9 +78,11 @@ export function Hero({ feature, count }: { feature: HeroFeature; count: number }
 
         <div className="hero-right relative z-[3] grid min-h-0 grid-rows-1 md:h-full md:gap-(--grid-gap) md:overflow-hidden">
           <div data-hero-card className="hero-headline-card linen flex min-h-0 w-full flex-col justify-between overflow-hidden rounded-[var(--card-radius)] border border-line p-[clamp(18px,3vh,28px)] md:p-[clamp(20px,4.2vh,46px)]">
-            <div className="flex items-center justify-between">
-              <span className="rounded-full border border-line bg-white/70 px-3 py-1.5 font-display text-[10px] tracking-[0.16em] text-muted uppercase">Sangam Designs™ · #Handcrafted</span>
-              <span className="font-sans text-[10px] font-medium text-muted tabular-nums">{count} pieces</span>
+            <div className="flex items-center justify-between gap-3">
+              <span className="min-w-0 truncate rounded-full border border-line bg-white/70 px-3 py-1.5 font-display text-[10px] tracking-[0.16em] whitespace-nowrap text-muted uppercase">
+                <span className="md:max-xl:hidden">Sangam Designs™ · </span>#Handcrafted
+              </span>
+              <span className="shrink-0 font-sans text-[10px] font-medium whitespace-nowrap text-muted tabular-nums">{count} pieces</span>
             </div>
             <div className="hero-headline-copy mt-[clamp(12px,3vh,40px)]">
               <SplitReveal as="h1" mode="intro" delay={0.2} className="m-0 max-w-[11ch] font-display text-[clamp(38px,11vw,58px)] leading-[0.9] font-medium tracking-[-0.01em] text-ink uppercase md:text-[clamp(38px,min(4.4vw,7.4vh),72px)]">

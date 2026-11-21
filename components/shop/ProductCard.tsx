@@ -126,10 +126,10 @@ export function ProductCard({
           {actionLabel}
         </button>
       </div>
-      <Link href={href} className="block px-1 pt-4 pb-1.5">
-        <div className="mb-1 flex flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
-          <h3 className="m-0 line-clamp-2 font-display text-[14px] leading-[1.08] font-medium tracking-[0.02em] text-ink uppercase sm:text-[16px]">{product.name}</h3>
-          <Price product={product} className="shrink-0 text-[12px] sm:pt-0.5 sm:text-right sm:text-[13px]" />
+      <Link href={href} className="@container block px-1 pt-4 pb-1.5">
+        <div className="mb-1 flex flex-col gap-1.5 @min-[340px]:flex-row @min-[340px]:items-start @min-[340px]:justify-between @min-[340px]:gap-3">
+          <h3 className="m-0 line-clamp-2 font-display text-[14px] leading-[1.08] font-medium tracking-[0.02em] text-ink uppercase @min-[220px]:text-[16px]">{product.name}</h3>
+          <Price product={product} className="shrink-0 text-[12px] @min-[220px]:text-[13px] @min-[340px]:pt-0.5 @min-[340px]:text-right" />
         </div>
         <div className="mt-3 flex items-center justify-between gap-2">
           <span className="truncate font-display text-[9px] tracking-[0.14em] text-muted uppercase">{product.categoryName}</span>

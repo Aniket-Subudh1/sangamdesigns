@@ -71,7 +71,7 @@ export default async function ContactPage() {
             <p className={`${kickerClass} mb-4`}>Custom & corporate</p>
             <h2 className="m-0 font-display text-[clamp(36px,4.4vw,60px)] leading-[0.95] font-medium uppercase">Made for your event</h2>
           </div>
-          <p className="m-0 hidden max-w-[36ch] text-right text-[12px] leading-[1.6] text-muted sm:block">Branded totes, conference bags and woven stoles — made to order.</p>
+          <p className="m-0 hidden max-w-[36ch] text-right text-[13px] leading-[1.6] text-steel sm:block">Branded totes, conference bags and woven stoles — made to order.</p>
         </div>
         <Reveal stagger={0.08} className="grid grid-cols-3 gap-(--grid-gap)">
           {customShots.map((src) => (

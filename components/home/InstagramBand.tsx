@@ -28,8 +28,8 @@ export function InstagramBand({ site, images }: { site: SiteContent; images: str
           </MagneticButton>
         </div>
         <Reveal stagger={0.06} className="grid grid-cols-3 gap-(--grid-gap)">
-          {images.slice(0, 6).map((src, i) => (
-            <a key={src} data-reveal-item href={site.instagramUrl} target="_blank" rel="noreferrer" className={`group relative aspect-square overflow-hidden rounded-[18px] bg-white ${i % 2 ? "translate-y-4" : ""}`} aria-label="View on Instagram">
+          {images.slice(0, 6).map((src) => (
+            <a key={src} data-reveal-item href={site.instagramUrl} target="_blank" rel="noreferrer" className="group relative aspect-square overflow-hidden rounded-[18px] bg-white" aria-label="View on Instagram">
               <Image src={src} alt="" fill sizes="(max-width: 900px) 30vw, 18vw" className="object-cover transition-transform duration-700 ease-store group-hover:scale-110" />
               <span className="absolute inset-0 grid place-items-center bg-stitch/0 text-white opacity-0 transition-all duration-300 group-hover:bg-stitch/35 group-hover:opacity-100">
                 <InstagramIcon className="size-7" />

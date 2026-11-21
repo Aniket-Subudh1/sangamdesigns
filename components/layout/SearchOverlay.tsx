@@ -3,7 +3,7 @@
 import { ArrowRight, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Price } from "@/components/ui/Price";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { EASE, gsap, useGSAP } from "@/lib/gsap";
@@ -37,17 +37,15 @@ export function SearchOverlay({
   const inputRef = useRef<HTMLInputElement>(null);
   const results = useMemo(() => searchProducts(index, query), [index, query]);
 
-  useEffect(() => {
-    if (open) inputRef.current?.focus();
-  }, [open]);
-
   useGSAP(
     () => {
       const panel = panelRef.current;
       if (!panel) return;
       if (open) {
-        gsap.set(panel, { display: "block" });
-        gsap.fromTo(panel, { autoAlpha: 0, y: -12 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: EASE });
+        // Must be visible before focus(); autoAlpha would hide it for the first frame.
+        gsap.set(panel, { display: "block", visibility: "visible" });
+        inputRef.current?.focus();
+        gsap.fromTo(panel, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.5, ease: EASE });
       } else {
         gsap.to(panel, { autoAlpha: 0, y: -8, duration: 0.22, ease: "power2.in", onComplete: () => { gsap.set(panel, { display: "none" }); } });
       }

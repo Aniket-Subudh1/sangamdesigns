@@ -11,12 +11,12 @@ export function Mission() {
   return (
     <section className={`${contentClass} mt-(--section-space) mb-(--grid-gap)`} id="mission">
       <div className="overflow-hidden rounded-[var(--card-radius)] bg-white px-[clamp(18px,4vw,54px)] pt-[clamp(38px,5vw,68px)]">
-        <div className="mb-10 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
-          <div>
+        <div className="mb-[clamp(32px,4vw,48px)] grid gap-6 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] md:items-end md:gap-10">
+          <div className="min-w-0">
             <span className={`${kickerClass} mb-4`}>Our mission</span>
-            <SplitReveal className="m-0 max-w-[10ch] font-display text-[clamp(42px,5vw,70px)] leading-[0.94] font-medium uppercase">Waste to wealth, one block at a time.</SplitReveal>
+            <SplitReveal className="m-0 max-w-[13ch] font-display text-[clamp(38px,5vw,70px)] leading-[0.94] font-medium uppercase">Waste to wealth, one block at a time.</SplitReveal>
           </div>
-          <p className="m-0 max-w-[38ch] text-[12px] leading-[1.7] text-muted">Upcycle & recycle to craft planet-friendly products — and empower the differently abled while we do it.</p>
+          <p className="m-0 max-w-[40ch] border-l-2 border-stitch/40 pl-4 text-[14px] leading-[1.7] text-steel md:justify-self-end">Upcycle & recycle to craft planet-friendly products — and empower the differently abled while we do it.</p>
         </div>
         <div className="relative mx-auto h-[clamp(280px,34vw,510px)] max-w-[880px] max-[767px]:h-[280px]">
           <Reveal className={`${fanClass} left-[3%] h-[68%] w-[42%] max-[767px]:left-0 max-[767px]:h-[64%] max-[767px]:w-[53%]`}>

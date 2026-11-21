@@ -41,11 +41,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   const [site, tree, searchIndex] = await Promise.all([getSite(), getCategoryTree(), getSearchIndex()]);
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${oswald.variable} ${script.variable} overflow-x-hidden`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${oswald.variable} ${script.variable} overflow-x-clip`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
-      <body className="m-0 overflow-x-hidden bg-paper-warm font-sans text-charcoal antialiased">
+      <body className="m-0 overflow-x-clip bg-paper-warm font-sans text-charcoal antialiased">
         <StoreProvider>
           <Preloader />
           <SmoothScroll />

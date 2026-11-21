@@ -62,8 +62,10 @@ export function EnquiryDialog({ site }: { site: SiteContent }) {
       if (open) {
         gsap.set([overlay, dialog], { display: "grid" });
         gsap.fromTo(overlay, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 });
-        gsap.fromTo(dialog.firstElementChild, { y: 40, scale: 0.96, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.6, ease: EASE });
+        // Must be visible before focus(); autoAlpha would hide it for the first frame.
+        gsap.set(dialog.firstElementChild, { visibility: "visible" });
         dialog.querySelector("textarea")?.focus({ preventScroll: true });
+        gsap.fromTo(dialog.firstElementChild, { y: 40, scale: 0.96, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.6, ease: EASE });
       } else {
         gsap.to(overlay, { autoAlpha: 0, duration: 0.25, onComplete: () => { gsap.set(overlay, { display: "none" }); } });
         gsap.to(dialog.firstElementChild, { y: 20, autoAlpha: 0, duration: 0.25, ease: "power2.in", onComplete: () => { gsap.set(dialog, { display: "none" }); } });
@@ -92,7 +94,7 @@ export function EnquiryDialog({ site }: { site: SiteContent }) {
     <>
       <div ref={overlayRef} className="fixed inset-0 z-[110] bg-black/45 backdrop-blur-[3px]" style={{ display: "none" }} onClick={closeEnquiry} aria-hidden="true" />
       <div ref={dialogRef} className="pointer-events-none fixed inset-0 z-[111] place-items-center p-4" style={{ display: "none" }}>
-        <div role="dialog" aria-modal="true" aria-label={copy.title} className="pointer-events-auto relative w-[min(520px,100%)] overflow-hidden rounded-[26px] bg-white shadow-[0_30px_80px_rgb(0_0_0/0.25)]" data-lenis-prevent>
+        <div role="dialog" aria-modal="true" aria-label={copy.title} className="pointer-events-auto relative max-h-full w-[min(520px,100%)] overflow-y-auto overscroll-contain rounded-[26px] bg-white shadow-[0_30px_80px_rgb(0_0_0/0.25)]" data-lenis-prevent>
           <div className="linen stitch relative px-6 pt-7 pb-6 sm:px-8">
             <button className={`${canvasCloseClass} absolute top-4 right-4`} onClick={closeEnquiry} aria-label="Close">
               <X size={18} />

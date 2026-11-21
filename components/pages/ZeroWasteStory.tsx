@@ -92,14 +92,14 @@ export function ZeroWasteStory() {
   );
 
   return (
-    <section ref={ref} className="relative mx-auto w-full max-w-[var(--content-max)] px-(--page-gutter) lg:h-svh">
+    <section ref={ref} className="relative mx-auto w-full max-w-[var(--content-max)] px-(--page-gutter) motion-safe:lg:h-svh">
       <div className="grid h-full items-center gap-10 rounded-[var(--card-radius)] bg-white p-[clamp(20px,4vw,56px)] lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="relative lg:h-[300px]">
-          <span className="absolute top-0 -left-[clamp(10px,2vw,28px)] hidden h-full w-px bg-line lg:block">
+        <div className="relative motion-safe:lg:h-[300px]">
+          <span className="absolute top-0 -left-[clamp(10px,2vw,28px)] hidden h-full w-px bg-line motion-safe:lg:block">
             <span data-progress className="block h-full origin-top scale-y-0 bg-stitch" />
           </span>
           {steps.map((s, i) => (
-            <div key={s.title} data-step className="mb-8 lg:absolute lg:inset-0 lg:mb-0">
+            <div key={s.title} data-step className="mb-8 last:mb-0 motion-safe:lg:absolute motion-safe:lg:inset-0 motion-safe:lg:mb-0">
               <span className="font-sans text-[12px] font-medium text-stitch tabular-nums">{pad2(i + 1)} / {pad2(steps.length)}</span>
               <h3 className="mt-2 mb-3 font-display text-[clamp(44px,5vw,80px)] leading-[0.9] font-medium uppercase">{s.title}</h3>
               <p className="m-0 max-w-[38ch] text-[14px] leading-[1.7] text-steel">{s.body}</p>

@@ -24,11 +24,11 @@ export function CartDrawer() {
       if (!panel || !overlay) return;
       if (isCartOpen) {
         gsap.to(overlay, { autoAlpha: 1, duration: 0.3 });
-        gsap.to(panel, { xPercent: 0, duration: 0.65, ease: EASE });
+        gsap.to(panel, { x: 0, xPercent: 0, duration: 0.65, ease: EASE });
         gsap.fromTo(panel.querySelectorAll("[data-line]"), { x: 40, autoAlpha: 0 }, { x: 0, autoAlpha: 1, stagger: 0.05, delay: 0.15, duration: 0.6, ease: EASE });
       } else {
         gsap.to(overlay, { autoAlpha: 0, duration: 0.3 });
-        gsap.to(panel, { xPercent: 104, duration: 0.45, ease: "power3.in" });
+        gsap.to(panel, { x: 0, xPercent: 104, duration: 0.45, ease: "power3.in" });
       }
     },
     { dependencies: [isCartOpen] },
