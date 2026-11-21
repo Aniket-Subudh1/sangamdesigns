@@ -1,69 +1,94 @@
-import Image from "next/image";
+import { CategoryExplore } from "@/components/home/CategoryExplore";
+import { Hero } from "@/components/home/Hero";
+import { InstagramBand } from "@/components/home/InstagramBand";
+import { Mission } from "@/components/home/Mission";
+import { PatternRail } from "@/components/home/PatternRail";
+import { ServiceStrip } from "@/components/home/ServiceStrip";
+import { SplitFeatures } from "@/components/home/SplitFeatures";
+import { StudioGallery, type StudioItem } from "@/components/home/StudioGallery";
+import { WhySangam } from "@/components/home/WhySangam";
+import { Marquee } from "@/components/motion/Marquee";
+import { Reveal } from "@/components/motion/Reveal";
+import { SplitReveal } from "@/components/motion/SplitReveal";
+import { ProductGrid } from "@/components/shop/ProductGrid";
+import { getCategoryTree, getFeaturedProducts, getPatterns, getProduct, getSearchIndex, getSite, toSummary } from "@/lib/data";
+import { kickerClass, sectionClass, sectionTitleClass, textLinkCtaClass, textLinkLabelClass } from "@/lib/styles";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-export default function Home() {
+const studioPicks: { slug: string; caption: string }[] = [
+  { slug: "fans-of-love-fans-on-red-squares-qu10", caption: "Quilt" },
+  { slug: "multicoloured-umbrellas-be35", caption: "Bedspread" },
+  { slug: "red-butterfly-applique-be9", caption: "Bedspread" },
+  { slug: "pink-and-grey-houses-be21", caption: "Bedspread" },
+  { slug: "waves-of-the-ocean-white-border-qu9", caption: "Quilt" },
+  { slug: "purple-diyas-on-mehendi-and-purple-polka-dots-be30", caption: "Bedspread" },
+  { slug: "ajrakh-fans-dohar-with-blue-border-be26", caption: "Fans dohar" },
+  { slug: "aqua-and-blue-applique-flowers-du30", caption: "Duvet cover" },
+  { slug: "brown-butterflies-on-khaki-with-mangalagiri-khadi-print-be28", caption: "Bedspread" },
+];
+
+export default async function Home() {
+  const [site, tree, featured, patterns, index] = await Promise.all([
+    getSite(),
+    getCategoryTree(),
+    getFeaturedProducts(),
+    getPatterns(),
+    getSearchIndex(),
+  ]);
+
+  const studioProducts = await Promise.all(studioPicks.map((s) => getProduct(s.slug)));
+  const studio: StudioItem[] = studioProducts.flatMap((p, i) =>
+    p && p.images.length ? [{ src: p.images[1] ?? p.images[0], title: p.name, caption: `${p.skus[0]} · ${studioPicks[i].caption}`, href: `/product/${p.slug}` }] : [],
+  );
+
+  const heroProduct = await getProduct("fans-of-love-fans-on-red-squares-qu10");
+  const feature = heroProduct
+    ? { href: `/product/${heroProduct.slug}`, image: heroProduct.images[0], name: heroProduct.name, label: "Signature quilt" }
+    : { href: "/shop", image: "/products/qu10/1.webp", name: "Shop quilts", label: "Signature quilt" };
+
+  const featuredSummaries = featured.map(toSummary);
+  const rootChips = tree
+    .filter((n) => featuredSummaries.some((p) => p.rootCategory === n.slug))
+    .map((n) => ({ label: n.name, value: n.slug, field: "rootCategory" as const }));
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Hero feature={feature} count={index.length} />
+
+      <Marquee
+        className="border-y border-line bg-white py-4 text-ink"
+        items={["Patchwork", "Appliqué", "Ajrakh", "Kalamkari", "Sambalpuri", "Madhubani", "Jaipur prints", "Crochet", "Log cabin", "Upcycled"]}
+      />
+
+      <section className={sectionClass} id="favourites">
+        <div className="mb-8 flex items-end justify-between gap-6">
+          <div>
+            <p className={`${kickerClass} mb-4`}>Picked from the studio</p>
+            <SplitReveal className={`${sectionTitleClass} max-w-[9ch] text-[clamp(44px,5.5vw,76px)]`}>Favourite pieces</SplitReveal>
+          </div>
+          <Link className={`${textLinkCtaClass} text-ink max-[767px]:hidden`} href="/shop">
+            <span className={textLinkLabelClass}>Shop all {index.length} pieces</span>
+            <ArrowRight size={14} className="transition-transform duration-200 ease-store group-hover:translate-x-[3px]" />
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <ProductGrid products={featuredSummaries} chips={rootChips} limit={8} />
+        <Reveal className="mt-8 flex justify-center md:hidden">
+          <Link className={`${textLinkCtaClass} text-ink`} href="/shop">
+            <span className={textLinkLabelClass}>Shop all pieces</span>
+            <ArrowRight size={14} />
+          </Link>
+        </Reveal>
+      </section>
+
+      <WhySangam />
+      <ServiceStrip />
+      <CategoryExplore tree={tree} />
+      <PatternRail patterns={patterns} />
+      <SplitFeatures />
+      <StudioGallery items={studio} />
+      <InstagramBand site={site} images={["/gallery/a022.webp", "/products/be41/2.webp", "/products/qu9/2.webp", "/products/be28/2.webp", "/products/du19/2.webp", "/gallery/b022.webp"]} />
+      <Mission />
+    </>
   );
 }
